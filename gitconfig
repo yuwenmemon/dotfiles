@@ -1,0 +1,57 @@
+[user]
+	name = Carlos Alvarez
+	email = cead22@gmail.com
+[github]
+	user = cead22
+[color]
+	ui = true
+[diff]
+    tool = vimdiff
+[difftool]
+    prompt = false
+[color "diff"]
+    meta = yellow 
+    frag = magenta 
+    old = red 
+    new = green 
+[alias]
+    st = stash
+    ci = commit
+    cv = commit -v
+    dc = diff --cached
+    ca = commit -a
+    lg = log --graph --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=relative
+    lp = log -p
+    sl = stash list
+    aa = add --all
+    ap = add -p
+    conflict = diff --name-only --diff-filter=U
+    conflicts = diff --name-only --diff-filter=U
+    pm = pull --rebase origin master
+    dm = diff master
+    db = branch -d
+    rh = reset --hard HEAD
+    dt = diff tool
+    dp = diff --patience
+    dcp = diff --cached --patience
+    co = checkout
+    cb = checkout -b 
+    ri = rebase -i
+    cp = cherry-pick
+    cm = commit -m
+    sp = stash pop
+    bg = bisect good
+    bb = bisect bad
+    rb = branch -m
+    ss = stash save
+    fo = fetch origin
+    pb = "!f() { git pull -u ${1:-origin} `git symbolic-ref HEAD`; }; f"
+    foc = !git fetch origin $1 && git co $1
+    np = !git --no-pager
+
+    # typos
+    dif = diff
+    difff = diff
+    shoe = git show
+
+    pullall = submodule foreach git pull origin
