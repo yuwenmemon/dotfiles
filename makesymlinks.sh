@@ -21,7 +21,6 @@ echo "done"
 echo -n "Changing to the $dir directory ..."
 cd $dir
 echo "done"
-printf "\n\n"
 
 # move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks from the homedir to any files in the ~/dotfiles directory specified in $files
 printf '\e[1;34m%-6s\e[m' "Removing existing backup files"
@@ -29,18 +28,15 @@ printf "\n"
 for file in $files; do
     rm $olddir/$file
 done
-printf "\n\n"
 
 printf '\e[1;34m%-6s\e[m' "Moving any existing dotfiles from $dir to $olddir"
 printf "\n"
 for file in $files; do
-    mv ~/$file $olddir/$file
+    mv ~/.$file $olddir/$file
 done
-printf "\n\n"
 
 printf '\e[1;34m%-6s\e[m' "Creating symlink to $file in home directory"
 printf "\n"
 for file in $files; do
     ln -s $dir/$file ~/.$file
 done
-printf "\n\n"
