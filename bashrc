@@ -39,11 +39,6 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-fi
 unset color_prompt force_color_prompt
 
 # Load aliases from ~/.aliases file
@@ -56,8 +51,35 @@ if [ -f ~/.extra ]; then
     . ~/.extra
 fi
 
-export PS1="\[\033[30m\]\u@\h:\w:\[\033[31m\]\`ruby -e \"print (%x{git branch 2> /dev/null}.grep(/^\*/).first || '').gsub(/^\* (.+)$/, '(\1)')\"\`\[\033[37m\]$\[\033[00m\] "
-
 # RVM
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+
+ruby -v
+
+# export PS1="\[\033[30m\]\u@\h:\w:\[\033[31m\]\`ruby -e \"print (%x{git branch 2> /dev/null}.grep(/^\*/).first || '').gsub(/^\* (.+)$/, '(\1)')\"\`\[\033[37m\]$\[\033[00m\] "
+function parse_git_dirty {
+    [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"
+}
+function get_branch_color {
+    local dirty=$(parse_git_dirty)
+    if [[ $dirty == '*' ]]
+    then
+        echo "\[\033[31m\]"
+    else
+        echo "\[\033[32m\]"
+    fi
+}
+function parse_git_branch {
+    git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/[\1$(parse_git_dirty)]/"
+}
+function color_my_prompt {
+    local host="\[\033[01;32m\]\h"
+    local dir="\[\033[01;34m\]\W"
+    local branch_color=$(get_branch_color)
+    local git_branch='`git branch 2> /dev/null | grep -e ^* | sed -E  s/^\\\\\*\ \(.+\)$/\(\\\\\1\)\ /`'
+    local last_color="\[\033[00m\]"
+    local prompt_symbol="$"
+    export PS1="$host $dir $branch_color$git_branch$prompt_symbol$last_color "
+}
+PROMPT_COMMAND=color_my_prompt
