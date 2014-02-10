@@ -16,6 +16,8 @@ HISTFILESIZE=2000
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
+export EDITOR='vim'
+
 # set a fancy prompt (non-color, unless we know we "want" color)
 #case "$TERM" in
 #    xterm-color) color_prompt=no;;
