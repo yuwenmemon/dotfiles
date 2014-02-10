@@ -74,7 +74,7 @@ function parse_git_branch {
     git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/[\1$(parse_git_dirty)]/"
 }
 function color_my_prompt {
-    local host="\[\033[01;32m\]\h"
+    local host="\[\033[01;36m\]\h"
     local dir="\[\033[01;34m\]\W"
     local branch_color=$(get_branch_color)
     local git_branch='`git branch 2> /dev/null | grep -e ^* | sed -E  s/^\\\\\*\ \(.+\)$/\(\\\\\1\)\ /`'
