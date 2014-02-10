@@ -59,7 +59,7 @@ ruby -v
 
 # export PS1="\[\033[30m\]\u@\h:\w:\[\033[31m\]\`ruby -e \"print (%x{git branch 2> /dev/null}.grep(/^\*/).first || '').gsub(/^\* (.+)$/, '(\1)')\"\`\[\033[37m\]$\[\033[00m\] "
 function parse_git_dirty {
-    [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"
+    [[ $(git diff --shortstat) ]] && echo "*"
 }
 function get_branch_color {
     local dirty=$(parse_git_dirty)
@@ -69,9 +69,6 @@ function get_branch_color {
     else
         echo "\[\033[32m\]"
     fi
-}
-function parse_git_branch {
-    git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/[\1$(parse_git_dirty)]/"
 }
 function color_my_prompt {
     local host="\[\033[01;36m\]\h"
