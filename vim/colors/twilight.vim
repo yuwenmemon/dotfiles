@@ -1,23 +1,18 @@
-" Vim color file
-" Maintainer: Henry So, Jr. <henryso@panix.com>
-
-" These are the colors of the "desert" theme by Hans Fugal with a few small
-" modifications (namely that I lowered the intensity of the normal white and
-" made the normal and nontext backgrounds black), modified to work with 88-
-" and 256-color xterms.
+" twilight256 color scheme file
+" Maintainer: Neal Milstein - neal dot milstein at gmail dot com
+" Last Change: 2011 Feb 1
 "
-" The original "desert" theme is available as part of the vim distribution or
-" at http://hans.fugal.net/vim/colors/.
+" This theme copies the colors from the TextMate theme Twilight.
 "
-" The real feature of this color scheme, with a wink to the "inkpot" theme, is
-" the programmatic approximation of the gui colors to the palettes of 88- and
-" 256- color xterms.  The functions that do this (folded away, for
-" readability) are calibrated to the colors used for Thomas E. Dickey's xterm
-" (version 200), which is available at http://dickey.his.com/xterm/xterm.html.
+" The theme is designed to be used on a black background. I only tested it
+" using a 256-color terminal; I do not think it will work on much else (gvim,
+" 8-color terminal, etc.).
 "
-" I struggled with trying to parse the rgb.txt file to avoid the necessity of
-" converting color names to #rrggbb form, but decided it was just not worth
-" the effort.  Maybe someone seeing this may decide otherwise...
+" The functions in this theme that convert hex color codes to the nearest
+" xterm-256 color number are from the theme desert2 (desert256), developed by Henry So, Jr. 
+"
+" The colors of this theme are based on the TextMate Twilight theme
+" – www.macromates.com
 
 set background=dark
 if version > 580
@@ -28,7 +23,7 @@ if version > 580
         syntax reset
     endif
 endif
-let g:colors_name="desert256"
+let g:colors_name="twilight256"
 
 if has("gui_running") || &t_Co == 88 || &t_Co == 256
     " functions {{{
@@ -240,10 +235,10 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
     endfun
     " }}}
 
-    call <SID>X("Normal", "cccccc", "000000", "")
+    call <SID>X("Normal", "ffffff", "", "")
 
     " highlight groups
-    call <SID>X("Cursor", "708090", "f0e68c", "")
+    "call <SID>X("Cursor", "708090", "f0e68c", "")
     "CursorIM
     "Directory
     "DiffAdd
@@ -251,36 +246,39 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
     "DiffDelete
     "DiffText
     "ErrorMsg
-    call <SID>X("VertSplit", "c2bfa5", "7f7f7f", "reverse")
-    call <SID>X("Folded", "ffd700", "4d4d4d", "")
-    call <SID>X("FoldColumn", "d2b48c", "4d4d4d", "")
-    call <SID>X("IncSearch", "708090", "f0e68c", "")
-    "LineNr
-    call <SID>X("ModeMsg", "daa520", "", "")
-    call <SID>X("MoreMsg", "2e8b57", "", "")
-    call <SID>X("NonText", "addbe7", "000000", "bold")
-    call <SID>X("Question", "00ff7f", "", "")
-    call <SID>X("Search", "f5deb3", "cd853f", "")
-    call <SID>X("SpecialKey", "9acd32", "", "")
-    call <SID>X("StatusLine", "c2bfa5", "000000", "reverse")
-    call <SID>X("StatusLineNC", "c2bfa5", "7f7f7f", "reverse")
-    call <SID>X("Title", "cd5c5c", "", "")
-    call <SID>X("Visual", "6b8e23", "f0e68c", "reverse")
+    "call <SID>X("VertSplit", "c2bfa5", "7f7f7f", "reverse")
+    "call <SID>X("Folded", "ffd700", "4d4d4d", "")
+    "call <SID>X("FoldColumn", "d2b48c", "4d4d4d", "")
+    "call <SID>X("IncSearch", "708090", "f0e68c", "")
+    call <SID>X("LineNr", "CCCCCC", "", "")
+    "call <SID>X("ModeMsg", "D4D4D4", "", "")
+    "call <SID>X("MoreMsg", "2e8b57", "", "")
+    "call <SID>X("NonText", "addbe7", "000000", "bold")
+    "call <SID>X("Question", "00ff7f", "", "")
+    "call <SID>X("Search", "f5deb3", "cd853f", "")
+    "call <SID>X("SpecialKey", "9acd32", "", "")
+    "call <SID>X("StatusLine", "c2bfa5", "000000", "reverse")
+    "call <SID>X("StatusLineNC", "c2bfa5", "7f7f7f", "reverse")
+    "call <SID>X("Title", "cd5c5c", "", "")
+    call <SID>X("Visual", "D3D3D3", "3E3E3E", "reverse")
     "VisualNOS
-    call <SID>X("WarningMsg", "fa8072", "", "")
+    "call <SID>X("WarningMsg", "fa8072", "", "")
     "WildMenu
     "Menu
     "Scrollbar
     "Tooltip
 
     " syntax highlighting groups
-    call <SID>X("Comment", "87ceeb", "", "")
-    call <SID>X("Constant", "ffa0a0", "", "")
-    call <SID>X("Identifier", "98fb98", "", "none")
-    call <SID>X("Statement", "f0e68c", "", "bold")
-    call <SID>X("PreProc", "cd5c5c", "", "")
-    call <SID>X("Type", "bdb76b", "", "bold")
-    call <SID>X("Special", "ffdead", "", "")
+    call <SID>X("Comment", "828282", "", "")
+    call <SID>X("Constant", "CF6A4C", "", "")
+    call <SID>X("Identifier", "7587A6", "", "none")
+    call <SID>X("Function", "9B703F", "", "")
+    call <SID>X("Define", "CDA869", "", "none")
+    call <SID>X("Statement", "CDA869", "", "")
+    call <SID>X("String", "8F9D6A", "", "")
+    call <SID>X("PreProc", "AFC4DB", "", "")
+    call <SID>X("Type", "F9EE98", "", "")
+    call <SID>X("Special", "DAEFA3", "", "")
     "Underlined
     call <SID>X("Ignore", "666666", "", "")
     "Error
@@ -297,42 +295,6 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
     delf <SID>grey_level
     delf <SID>grey_number
     " }}}
-else
-    " color terminal definitions
-    hi SpecialKey    ctermfg=darkgreen
-    hi NonText       cterm=bold ctermfg=darkblue
-    hi Directory     ctermfg=darkcyan
-    hi ErrorMsg      cterm=bold ctermfg=7 ctermbg=1
-    hi IncSearch     cterm=NONE ctermfg=yellow ctermbg=green
-    hi Search        cterm=NONE ctermfg=grey ctermbg=blue
-    hi MoreMsg       ctermfg=darkgreen
-    hi ModeMsg       cterm=NONE ctermfg=brown
-    hi LineNr        ctermfg=3
-    hi Question      ctermfg=green
-    hi StatusLine    cterm=bold,reverse
-    hi StatusLineNC  cterm=reverse
-    hi VertSplit     cterm=reverse
-    hi Title         ctermfg=5
-    hi Visual        cterm=reverse
-    hi VisualNOS     cterm=bold,underline
-    hi WarningMsg    ctermfg=1
-    hi WildMenu      ctermfg=0 ctermbg=3
-    hi Folded        ctermfg=darkgrey ctermbg=NONE
-    hi FoldColumn    ctermfg=darkgrey ctermbg=NONE
-    hi DiffAdd       ctermbg=4
-    hi DiffChange    ctermbg=5
-    hi DiffDelete    cterm=bold ctermfg=4 ctermbg=6
-    hi DiffText      cterm=bold ctermbg=1
-    hi Comment       ctermfg=darkcyan
-    hi Constant      ctermfg=brown
-    hi Special       ctermfg=5
-    hi Identifier    ctermfg=6
-    hi Statement     ctermfg=3
-    hi PreProc       ctermfg=5
-    hi Type          ctermfg=2
-    hi Underlined    cterm=underline ctermfg=5
-    hi Ignore        ctermfg=darkgrey
-    hi Error         cterm=bold ctermfg=7 ctermbg=1
 endif
 
 " vim: set fdl=0 fdm=marker:
