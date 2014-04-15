@@ -76,6 +76,7 @@ function get_branch_color {
     fi
 }
 function color_my_prompt {
+    history -a
     local host="\[\033[01;36m\]\h"
     local dir="\[\033[01;34m\]\W"
     local branch_color=$(get_branch_color)
