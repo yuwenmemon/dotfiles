@@ -55,19 +55,24 @@ fi
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 
-ruby -v
-
-# export PS1="\[\033[30m\]\u@\h:\w:\[\033[31m\]\`ruby -e \"print (%x{git branch 2> /dev/null}.grep(/^\*/).first || '').gsub(/^\* (.+)$/, '(\1)')\"\`\[\033[37m\]$\[\033[00m\] "
 function parse_git_dirty {
-    [[ $(git diff --shortstat) ]] && echo "*"
+    if ! git ls-files >& /dev/null; then
+        echo ""
+    else
+        [[ $(git diff --shortstat) ]] && echo "*"
+    fi
 }
 function get_branch_color {
-    local dirty=$(parse_git_dirty)
-    if [[ $dirty == '*' ]]
-    then
-        echo "\[\033[31m\]"
+    if ! git ls-files >& /dev/null; then
+        echo ""
     else
-        echo "\[\033[32m\]"
+        local dirty=$(parse_git_dirty)
+        if [[ $dirty == '*' ]]
+        then
+            echo "\[\033[31m\]"
+        else
+            echo "\[\033[32m\]"
+        fi
     fi
 }
 function color_my_prompt {
