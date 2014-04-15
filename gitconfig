@@ -18,6 +18,8 @@
     st = stash
     ci = commit
     cv = commit -v
+    cva = commit -v --amend
+    cc = commit -v --amend -CHEAD
     dc = diff --cached
     ca = commit -a
     lg = log --graph --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=relative
