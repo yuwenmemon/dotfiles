@@ -10,10 +10,10 @@
 [difftool]
     prompt = false
 [color "diff"]
-    meta = yellow 
-    frag = magenta 
-    old = red 
-    new = green 
+    meta = yellow
+    frag = magenta
+    old = red
+    new = green
 [alias]
     st = stash
     ci = commit
@@ -35,7 +35,7 @@
     dp = diff --patience
     dcp = diff --cached --patience
     co = checkout
-    cb = checkout -b 
+    cb = checkout -b
     ri = rebase -i
     cp = cherry-pick
     cm = commit -m
@@ -46,7 +46,7 @@
     ss = stash save
     fo = fetch origin
     pb = "!f() { git pull -u ${1:-origin} `git symbolic-ref HEAD`; }; f"
-    foc = !git fetch origin $1 && git co $1
+    foc = "!f(){ git fetch origin $1; git co $1 }; f"
     np = !git --no-pager
 
     # typos
