@@ -129,6 +129,9 @@ nnoremap Y y$
 nmap <leader>' :s/"/'/g<cr><cr>
 nnoremap j gj
 nnoremap k gk
+    
+" Prevent entering ex mode
+:nnoremap Q <Nop>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MULTIPURPOSE TAB KEY
