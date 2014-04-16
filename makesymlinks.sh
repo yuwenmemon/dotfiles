@@ -4,9 +4,11 @@
 # This script creates symlinks from the home directory to any desired dotfiles in ~/dotfiles
 ############################
 
-dir=~/dotfiles                      # dotfiles directory
-files="bashrc vimrc gitconfig bash_profile aliases"  # list of files/folders to symlink in homedir
-folders="vim"
+# dotfiles directory
+dir=~/dotfiles
+
+# list of files to symlink in homedir
+files="bashrc vimrc gitconfig bash_profile aliases"
 
 
 # change to the dotfiles directory
@@ -21,10 +23,6 @@ for file in $files
 do
     rm ~/.$file
 done
-for folder in $folders
-do
-    rm -rf ~/.$folder
-done
 
 printf '\e[1;34m%-6s\e[m' "Creating symlink to files in home directory"
 printf "\n"
@@ -32,10 +30,4 @@ for file in $files
 do
     printf "ln -s $dir/$file  ~/.$file\n"
     ln -s $dir/$file ~/.$file
-done
-for foler in $folders
-do
-    printf "ln -s $dir/$folder ~/.$folder\n"
-    cp -r $dir/$folder ~
-    mv ~/$folder ~/.$folder
 done
