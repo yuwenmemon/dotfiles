@@ -74,7 +74,7 @@ augroup vimrcEx
   "autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass,cucumber set ai sw=2 sts=2 et
   autocmd FileType python set sw=4 sts=4 et
 
-  autocmd! BufRead,BufNewFile *.sass setfiletype sass 
+  autocmd! BufRead,BufNewFile *.sass setfiletype sass
 
   autocmd BufRead *.mkd  set ai formatoptions=tcroqn2 comments=n:&gt;
   autocmd BufRead *.markdown  set ai formatoptions=tcroqn2 comments=n:&gt;
@@ -105,7 +105,6 @@ set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MISC KEY MAPS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"map <leader>y "*y
 " Move around splits with <c-hjkl>
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
@@ -124,12 +123,10 @@ function! MapCR()
 endfunction
 call MapCR()
 
-nnoremap <leader><leader> <c-^>
 nnoremap Y y$
-nmap <leader>' :s/"/'/g<cr><cr>
 nnoremap j gj
 nnoremap k gk
-    
+
 " Prevent entering ex mode
 :nnoremap Q <Nop>
 
@@ -155,14 +152,12 @@ inoremap <s-tab> <c-n>
 map <Left> <C-H>
 map <Right> <C-L>
 map <Up> :bnext <cr>
-map <Down> :bprevious <cr> 
+map <Down> :bprevious <cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " OPEN FILES IN DIRECTORY OF CURRENT FILE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
-map <leader>e :edit %%
-map <leader>v :view %%
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RENAME CURRENT FILE
@@ -198,7 +193,7 @@ command! OpenChangedFiles :call OpenChangedFiles()
 " Insert the current time
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 command! InsertTime :normal a<c-r>=strftime('%F %H:%M:%S.0 %z')<cr>
-" solarized options 
+" solarized options
 let g:solarized_termcolors = 256
 let g:solarized_visibility = "high"
 let g:solarized_contrast = "normal"
@@ -209,9 +204,17 @@ set timeoutlen=400
 nmap <leader>m :CommandT <cr>
 nmap <leader>c mxgg"*yG'x
 nmap <leader>d :bd<cr>
-nmap H ^
 nmap <leader>dd :bd<cr>:vs<cr><right><down>
+map <leader>e :edit %%
+map <leader>v :view %%
+nmap <leader>' :s/"/'/g<cr><cr>
+nnoremap <leader><leader> <c-^>
+
+nmap H ^
 nmap / /\V
+
+" Fix whitespcae
+nmap <F4> :FixWhitespace<cr>
 
 " Git diff current file
 nmap <F1> :!git diff -- %<cr>
