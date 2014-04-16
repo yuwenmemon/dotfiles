@@ -86,3 +86,5 @@ function color_my_prompt {
     export PS1="$host $dir $branch_color$git_branch$prompt_symbol$last_color "
 }
 PROMPT_COMMAND=color_my_prompt
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
