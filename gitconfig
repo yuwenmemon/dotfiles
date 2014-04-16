@@ -48,7 +48,7 @@
     ss = stash save
     fo = fetch origin
     pb = "!f() { git pull -u ${1:-origin} `git symbolic-ref HEAD`; }; f"
-    foc = "!f(){ git fetch origin $1; git co $1 }; f"
+    foc = "!f() { git fetch origin $1; git co $1; }; f"
     np = !git --no-pager
 
     # typos
