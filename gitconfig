@@ -15,36 +15,29 @@
     old = red
     new = green
 [alias]
+    ap = add -p
     st = stash
-    ci = commit
     cv = commit -v
     cva = commit -v --amend
     cc = commit -v --amend -CHEAD
     dc = diff --cached
-    ca = commit -a
     lg = log --graph --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=relative
     lp = log -p
     sl = stash list
-    aa = add --all
-    ap = add -p
     conflict = diff --name-only --diff-filter=U
     conflicts = diff --name-only --diff-filter=U
     pm = pull --rebase origin master
     dm = diff master
     db = branch -d
+    dbf = branch -D
     rh = reset --hard HEAD
-    dt = diff tool
-    dp = diff --patience
-    dcp = diff --cached --patience
     co = checkout
     cb = checkout -b
     ri = rebase -i
     cp = cherry-pick
-    cm = commit -m
     sp = stash pop
     bg = bisect good
     bb = bisect bad
-    rb = branch -m
     ss = stash save
     fo = fetch origin
     pb = "!f() { git pull -u ${1:-origin} `git symbolic-ref HEAD`; }; f"
