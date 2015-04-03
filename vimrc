@@ -208,8 +208,8 @@ map <leader>v :view %%
 nmap <leader>' :s/"/'/g<cr><cr>
 nnoremap <leader><leader> <c-^>
 
-nmap H ^
-nmap / /\V
+nnoremap H ^
+nnoremap / /\V
 
 " Fix whitespcae
 nmap <F4> :FixWhitespace<cr>
@@ -222,6 +222,9 @@ nnoremap <F2> :set nonumber!<CR>
 
 " Search for git conflict markers
 nnoremap <f3> /\v[=\<\>]{4,}<cr>
+
+" select inner word and go back to normal mode
+nnoremap <space> viw
 
 vnoremap < <gv
 vnoremap > >gv
@@ -284,6 +287,15 @@ augroup git " {
     autocmd!
     autocmd BufNewFile,BufRead *.git/{,modules/**/}{COMMIT_EDIT,MERGE_}MSG set ft=gitcommit
 augroup END
+
+nnoremap dlt dt>X
+
+iab fun function(){<cr>}<esc>O
+iab fune function( event ){<cr>}<esc>O
+iab dbg debugger;<esc>
+iab lje Log::alert( json_encode() );<esc>F(a
+iab sfunc public static function%(){<cr>}<esc>?%<cr>s
+
 
 " Run a given vim command on the results of fuzzy selecting from a given shell
 " command. See usage below.
