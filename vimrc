@@ -232,8 +232,12 @@ command! W w
 command! Q q
 command! Qa qa
 nnoremap vv :e ~/.vimrc<cr>
-autocmd Syntax js setlocal foldmethod=syntax
-autocmd Syntax js normal zR
+
+augroup js_syntax " {
+    autocmd!
+    autocmd Syntax js setlocal foldmethod=syntax
+    autocmd Syntax js normal zR
+augroup END " }
 
 
 " ctags path
@@ -257,11 +261,15 @@ endif
 
 " Highlight EOL whitespace, http://vim.wikia.com/wiki/Highlight_unwanted_spaces
 highlight ExtraWhitespace ctermbg=darkred guibg=#382424
-autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-" the above flashes annoyingly while typing, be calmer in insert mode
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+
+augroup whitespace " {
+    autocmd!
+    autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+    autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+    " the above flashes annoyingly while typing, be calmer in insert mode
+    autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+    autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+augroup END
 
 function! s:FixWhitespace(line1,line2)
     let l:save_cursor = getpos(".")
@@ -271,3 +279,8 @@ endfunction
 
 " Run :FixWhitespace to remove end of line white space.
 command! -range=% FixWhitespace call <SID>FixWhitespace(<line1>,<line2>)
+
+augroup git " {
+    autocmd!
+    autocmd BufNewFile,BufRead *.git/{,modules/**/}{COMMIT_EDIT,MERGE_}MSG set ft=gitcommit
+augroup END
