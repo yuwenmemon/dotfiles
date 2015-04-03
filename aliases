@@ -1,3 +1,4 @@
 alias s="git status --short"
 alias m="git co master"
 alias v="vim -c 'normal ,d' ."
+alias t='python ~/t.py --task-dir ~/tasks --list tasks'
