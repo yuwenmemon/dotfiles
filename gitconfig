@@ -1,3 +1,5 @@
+[core]
+    editor = vim
 [user]
 	name = Carlos Alvarez
 	email = cead22@gmail.com
