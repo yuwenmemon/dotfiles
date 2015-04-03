@@ -45,6 +45,8 @@
     pb = "!f() { git pull -u ${1:-origin} `git symbolic-ref HEAD`; }; f"
     foc = "!f() { git fetch origin $1; git co $1; }; f"
     np = !git --no-pager
+    da = !git branch --merged | grep -v "\\*" | xargs -n 1 git branch -d
+    au = add -u
 
     # typos
     dif = diff
