@@ -75,15 +75,21 @@ function get_branch_color {
         fi
     fi
 }
+function twolastdirs {
+tmp=${PWD%/*/*};
+[ ${#tmp} -gt 0 -a "$tmp" != "$PWD" ] && echo ${PWD:${#tmp}+1} || echo $PWD;
+}
 function color_my_prompt {
     history -a
     local host="\[\033[01;36m\]\h"
-    local dir="\[\033[01;34m\]\W"
+    local dircolor="\[\033[01;34m\]"
+    local dir="\W"
+    local twolastdirs="$(twolastdirs)"
     local branch_color=$(get_branch_color)
     local git_branch='`git branch 2> /dev/null | grep -e ^* | sed -E  s/^\\\\\*\ \(.+\)$/\(\\\\\1\)\ /`'
     local last_color="\[\033[00m\]"
     local prompt_symbol="$"
-    export PS1="$host $dir $branch_color$git_branch$prompt_symbol$last_color "
+    export PS1="$host $dircolor$twolastdirs $branch_color$git_branch$prompt_symbol$last_color "
 }
 PROMPT_COMMAND=color_my_prompt
 
