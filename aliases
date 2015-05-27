@@ -2,3 +2,31 @@ alias s="git status --short"
 alias m="git co master"
 alias v="vim -c 'normal ,d' ."
 alias t='python ~/t.py --task-dir ~/tasks --list tasks'
+alias jack='ack --js'
+alias pack='ack --php'
+alias hack='ack --html'
+
+function push(){
+    branch=`git rev-parse --abbrev-ref HEAD`
+    if [ $branch == 'master' ]; then
+        echo "DO NOT PUSH TO MASTER"
+    else
+        git push origin $branch
+    fi
+}
+
+function pushf(){
+    branch=`git rev-parse --abbrev-ref HEAD`
+    if [ $branch == 'master' ]; then
+        echo "DO NOT PUSH TO MASTER"
+    else
+        git push -f origin $branch
+    fi
+}
+
+function pr(){
+    remote=`git remote -v | grep origin | head -1 | awk '{print $2'} | sed 's/.*:\(.*\)*/\1/' | sed 's/\.git$//'`
+    branch=`git rev-parse --abbrev-ref HEAD`
+    open "https://github.com/$remote/compare/${1:-master}...$branch?expand=1"
+}
+
