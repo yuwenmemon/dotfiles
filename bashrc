@@ -94,3 +94,7 @@ function color_my_prompt {
 PROMPT_COMMAND=color_my_prompt
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+
+# adb
+export PATH="/Users/carlos/Library/Android/sdk/platform-tools:$PATH"
