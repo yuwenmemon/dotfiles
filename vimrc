@@ -295,7 +295,9 @@ iab fune function( event ){<cr>}<esc>O
 iab dbg debugger;<esc>
 iab lje Log::alert( json_encode() );<esc>F(a
 iab sfunc public static function%(){<cr>}<esc>?%<cr>s
-
+iab jsa JSON.stringify( <esc>A<bs> );<esc>
+iab jss JSON.stringify(
+iab yin yaplLogInsecure( JSON.stringify(
 
 " Run a given vim command on the results of fuzzy selecting from a given shell
 " command. See usage below.
