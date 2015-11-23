@@ -51,10 +51,6 @@ if [ -f ~/.extra ]; then
     . ~/.extra
 fi
 
-# RVM
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
-
 function parse_git_dirty {
     if ! git ls-files >& /dev/null; then
         echo ""
@@ -92,9 +88,6 @@ function color_my_prompt {
     export PS1="$host $dircolor$twolastdirs $branch_color$git_branch$prompt_symbol$last_color "
 }
 PROMPT_COMMAND=color_my_prompt
-
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-
 
 # adb
 export PATH="/Users/carlos/Library/Android/sdk/platform-tools:$PATH"
