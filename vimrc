@@ -1,6 +1,36 @@
-execute pathogen#infect()
-syntax on
-filetype plugin indent on
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" Plugin 'https://github.com/wincent/Command-T.git'
+Plugin 'https://github.com/kien/ctrlp.vim'
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'altercation/vim-colors-solarized'
+Bundle 'joonty/vdebug'
+Plugin 'elmcast/elm-vim'
+" Plugin 'Valloric/YouCompleteMe'
+
+augroup PHP
+    autocmd!
+    autocmd FileType php setlocal iskeyword+=$
+augroup END
+
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+
+" execute pathogen#infect()
+" let g:CommandTWildIgnore=&wildignore . ",**/node_modules/*"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BASIC EDITING CONFIGURATION
@@ -23,6 +53,7 @@ set switchbuf=useopen
 set numberwidth=4
 set showtabline=2
 set winwidth=79
+
 " This makes RVM work inside Vim. I have no idea why.
 set shell=bash
 " Prevent Vim from clobbering the scrollback buffer. See
@@ -39,15 +70,19 @@ set noswapfile
 set backspace=indent,eol,start
 " display incomplete commands
 set showcmd
+
 " Enable highlighting for syntax
 syntax on
+
 " Enable file type detection.
 " Use the default filetype settings, so that mail gets 'tw' set to 72,
 " 'cindent' is on in C files, etc.
 " Also load indent files, to automatically do language-dependent indenting.
 filetype plugin indent on
+
 " use emacs-style tab completion when selecting files, etc
 set wildmode=longest,list,full
+
 " make tab completion for files/buffers act like bash
 set wildmenu
 set smartindent
@@ -92,12 +127,12 @@ augroup END
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " STATUS LINE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" :set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
+:set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
 set statusline=%<%f\                     " Filename
 set statusline+=%w%h%m%r                 " Options
 " set statusline+=%{fugitive#statusline()} " Git Hotness
 set statusline+=\ [%{&ff}/%Y]            " Filetype
-" set statusline+=\ [%{getcwd()}]          " Current dir
+set statusline+=\ [%{getcwd()}]          " Current dir
 set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -108,9 +143,6 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
-"
-" Insert a hash rocket with <c-l>
-imap <c-l> <space>=><space>
 
 " Can't be bothered to understand ESC vs <c-c> in insert mode
 imap <c-c> <esc>
@@ -143,23 +175,13 @@ endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <s-tab> <c-n>
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ARROW KEYS ARE UNACCEPTABLE
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " move between splits/buffers
 map <Left> <C-H>
 map <Right> <C-L>
 map <Up> :bnext <cr>
 map <Down> :bprevious <cr>
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" OPEN FILES IN DIRECTORY OF CURRENT FILE
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-cnoremap %% <C-R>=expand('%:h').'/'<cr>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" RENAME CURRENT FILE
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Rename current file
 function! RenameFile()
     let old_name = expand('%')
     let new_name = input('New file name: ', expand('%'), 'file')
@@ -171,26 +193,6 @@ function! RenameFile()
 endfunction
 map <leader>n :call RenameFile()<cr>
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" OpenChangedFiles COMMAND
-" Open a split for each dirty file in git
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! OpenChangedFiles()
-  only " Close all windows, unless they're modified
-  let status = system('git status -s | grep "^ \?\(M\|A\|UU\)" | sed "s/^.\{3\}//"')
-  let filenames = split(status, "\n")
-  exec "edit " . filenames[0]
-  for filename in filenames[1:]
-    exec "sp " . filename
-  endfor
-endfunction
-command! OpenChangedFiles :call OpenChangedFiles()
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" InsertTime COMMAND
-" Insert the current time
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-command! InsertTime :normal a<c-r>=strftime('%F %H:%M:%S.0 %z')<cr>
 " solarized options
 let g:solarized_termcolors = 256
 let g:solarized_visibility = "high"
@@ -199,20 +201,31 @@ set background=light
 colorscheme solarized
 
 set timeoutlen=400
-nmap <leader>m :CommandT <cr>
+" nmap <leader>m :CommandT <cr>
+nmap <leader>m :CtrlP <cr>
+nmap <leader>b :CtrlPBuffer <cr>
+let g:ctrlp_custom_ignore = {
+    \ 'file': '\v(\.x)$',
+    \ 'dir': '\v(node_modules|vendor|externalLib|build)$',
+    \ }
+"let g:ctrlp_working_path_mode = 'c'
+
+
+" Copy current buffer content and return to position
 nmap <leader>c mxgg"*yG'x
+
+" Delete current buffer
 nmap <leader>d :bd<cr>
+
 nmap <leader>dd :bd<cr>:vs<cr><right><down>
 map <leader>e :edit %%
 map <leader>v :view %%
 nmap <leader>' :s/"/'/g<cr><cr>
 nnoremap <leader><leader> <c-^>
+nnoremap <leader>s q/kA
 
 nnoremap H ^
 nnoremap / /\V
-
-" Fix whitespcae
-nmap <F4> :FixWhitespace<cr>
 
 " Git diff current file
 nmap <F1> :!git diff -- %<cr>
@@ -222,6 +235,12 @@ nnoremap <F2> :set nonumber!<CR>
 
 " Search for git conflict markers
 nnoremap <f3> /\v[=\<\>]{4,}<cr>
+
+" Fix whitespcae
+nmap <F4> :FixWhitespace<cr>
+
+" Toggle set paste
+nmap <F6> :set paste!<cr>:set paste?<cr>
 
 " select inner word and go back to normal mode
 nnoremap <space> viw
@@ -244,7 +263,8 @@ augroup END " }
 
 
 " ctags path
-set tags=./tags
+" set tags=./tags
+set tags=./tags,tags;$HOME
 
 " Auto reload vimrc on save
 augroup reload_vimrc " {
@@ -317,3 +337,16 @@ endfunction
 " Find all files in all non-dot directories starting in the working directory.
 " Fuzzy select one of those. Open the selected file with :e.
 nnoremap <leader>f :call SelectaCommand("find * -type f", "", ":e")<cr>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Vdebug
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:vdebug_options = {}
+let g:vdebug_options["path_maps"] = {
+\    "/vagrant/Server-Scraper" : $HOME."/Expensidev/Server-Scraper",
+\    "/vagrant/Web-Expensify" : $HOME."/Expensidev/Web-Expensify",
+\    "/vagrant/config/www/switch/_beforeSwitch.php" : $HOME."/Expensidev/Web-Expensify/_before.php",
+\    "/vagrant/config/www/switch/_afterSwitch.php" : $HOME."/Expensidev/Web-Expensify/_after.php"
+\}
+let g:vdebug_options['timeout'] = 60
+let g:vdebug_options['break_on_open'] = 0
