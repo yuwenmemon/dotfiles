@@ -5,6 +5,8 @@ alias t='python ~/t.py --task-dir ~/tasks --list tasks'
 alias jack='ack --js'
 alias pack='ack --php'
 alias hack='ack --html'
+alias l='ls -lrth'
+alias dt='cd ~/Desktop && open .'
 
 function push(){
     branch=`git rev-parse --abbrev-ref HEAD`
