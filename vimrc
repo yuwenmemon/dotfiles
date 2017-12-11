@@ -208,6 +208,7 @@ let g:ctrlp_custom_ignore = {
     \ 'file': '\v(\.x)$',
     \ 'dir': '\v(node_modules|vendor|externalLib|build)$',
     \ }
+    "\ 'dir': '\v(node_modules|externalLib|build)$',
 "let g:ctrlp_working_path_mode = 'c'
 
 
