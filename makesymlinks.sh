@@ -8,7 +8,7 @@
 dir=~/dotfiles
 
 # list of files to symlink in homedir
-files="bashrc vimrc gitconfig bash_profile aliases"
+files="bashrc vimrc gitconfig bash_profile aliases git-completion.bash"
 
 # change to the dotfiles directory
 echo -n "Changing to the $dir directory ..."
