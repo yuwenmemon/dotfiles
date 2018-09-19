@@ -1,6 +1,6 @@
 Dotfiles
 ========
-Forked and inspired from [michaeljsmalley/dotfiles](https://github.com/michaeljsmalley/dotfiles),
+Forked and inspired from [michaeljsmalley/dotfiles](https://github.com/michaeljsmalley/dotfiles)/[cead22/dotfiles](https://github.com/cead22/dotfiles),
 this repository includes my custom dotfiles.
 
 They should be cloned to your home directory so that the path is `~/dotfiles/`.
@@ -15,7 +15,7 @@ Installation
 ------------
 
 ``` bash
-git clone git://github.com/cead22/dotfiles ~/dotfiles
+git clone git://github.com/bondydaa/dotfiles ~/dotfiles
 cd ~/dotfiles
 ./makesymlinks.sh
 ```
