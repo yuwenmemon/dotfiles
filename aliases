@@ -4,7 +4,7 @@ alias hack='ack --html'
 alias l='ls -lrth'
 
 # start rbenv automatically
-eval "$(rbenv init -)"
+#eval "$(rbenv init -)"
 
 # expensify aliases
 dev_dir="Expensidev"
