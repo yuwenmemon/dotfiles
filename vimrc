@@ -1,32 +1,77 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" Specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)
+call plug#begin('~/.vim/plugged')
 
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+" Make sure you use single quotes
+Plug 'ctrlpvim/ctrlp.vim'
 
-" Plugin 'https://github.com/wincent/Command-T.git'
-Plugin 'https://github.com/kien/ctrlp.vim'
+Plug 'ludovicchabant/vim-gutentags'
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'altercation/vim-colors-solarized'
-Bundle 'joonty/vdebug'
-Plugin 'elmcast/elm-vim'
-" Plugin 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe'
 
-augroup PHP
-    autocmd!
-    autocmd FileType php setlocal iskeyword+=$
-augroup END
+Plug 'jelera/vim-javascript-syntax'
 
+Plug 'vim-syntastic/syntastic'
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+Plug 'modess/vim-phpcolors'
+
+Plug 'StanAngeloff/php.vim'
+
+Plug 'nanotech/jellybeans.vim', { 'tag': 'v1.6' }
+
+Plug 'pangloss/vim-javascript'
+
+Plug 'NLKNguyen/papercolor-theme'
+
+Plug 'ivalkeen/vim-ctrlp-tjump'
+
+Plug 'NLKNguyen/c-syntax.vim'
+
+Plug 'zxqfl/tabnine-vim'
+
+" Initialize plugin system
+call plug#end()
+
+set relativenumber
+
+" auto command to remove trailing whitespace on save
+autocmd BufWritePre * %s/\s\+$//e
+
+" split to the bottom on horizontal splits, to the right on vertical split
+set splitbelow
+set splitright
+
+" Syntastic settings
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:javascript_plugin_jsdoc = 1
+let g:loaded_syntastic_java_javac_checker = 1 " disable javac checker
+
+set t_Co=256
+set background=light
+let g:PaperColor_Theme_Options = {
+  \   'language': {
+  \     'cpp': {
+  \       'highlight_standard_library': 1
+  \     },
+  \     'c': {
+  \       'highlight_builtins' : 1
+  \     }
+  \   }
+  \ }
+colorscheme PaperColor
+
+set statusline+=%{gutentags#statusline()}
+nnoremap <c-]> :CtrlPtjump<cr>
+vnoremap <c-]> :CtrlPtjumpVisual<cr>
 
 
 " execute pathogen#infect()
@@ -127,13 +172,13 @@ augroup END
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " STATUS LINE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-:set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
-set statusline=%<%f\                     " Filename
-set statusline+=%w%h%m%r                 " Options
+":set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
+"set statusline=%<%f\                     " Filename
+"set statusline+=%w%h%m%r                 " Options
 " set statusline+=%{fugitive#statusline()} " Git Hotness
-set statusline+=\ [%{&ff}/%Y]            " Filetype
-set statusline+=\ [%{getcwd()}]          " Current dir
-set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
+"set statusline+=\ [%{&ff}/%Y]            " Filetype
+"set statusline+=\ [%{getcwd()}]          " Current dir
+"set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MISC KEY MAPS
@@ -194,11 +239,11 @@ endfunction
 map <leader>n :call RenameFile()<cr>
 
 " solarized options
-let g:solarized_termcolors = 256
-let g:solarized_visibility = "high"
-let g:solarized_contrast = "normal"
-set background=light
-colorscheme solarized
+"let g:solarized_termcolors = 256
+"let g:solarized_visibility = "high"
+"let g:solarized_contrast = "normal"
+"set background=light
+"colorscheme solarized
 
 set timeoutlen=400
 " nmap <leader>m :CommandT <cr>
