@@ -1,11 +1,10 @@
 [core]
     editor = vim
 [user]
-    name = Carlos Alvarez
-    # email = cead22@gmail.com
-    email = carlos@expensify.com
+    name = David Bondy
+    email = dbondy@expensify.com
 [github]
-	user = cead22
+	user = bondydaa
 [color]
 	ui = true
 [diff]
