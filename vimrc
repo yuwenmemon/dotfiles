@@ -275,7 +275,6 @@ nnoremap <leader><leader> <c-^>
 nnoremap <leader>s q/kA
 
 nnoremap H ^
-nnoremap / /\V
 
 " Git diff current file
 nmap <F1> :!git diff -- %<cr>
