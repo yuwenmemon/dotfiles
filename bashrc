@@ -86,7 +86,7 @@ tmp=${PWD%/*/*};
 function color_my_prompt {
     history -a
     local host="\[\033[01;36m\]\h"
-    local dircolor="\[\033[01;33m\]"
+    local dircolor="\[\033[1;34m\]"
     local dir="\W"
     local twolastdirs="$(twolastdirs)"
     local branch_color=$(get_branch_color)
