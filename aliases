@@ -27,6 +27,9 @@ export GITHUB_TOKEN=9b1ef9324b57a3263ad7b70ecd5cc0a2700a49c3
 # adding things $PATH
 export PATH=/usr/local/bin:$PATH
 export PATH=$PATH:~/Library/Android/sdk/platform-tools # android sdk tools (adb)
+export PATH=/usr/local/sbin:$PATH # homebrew stuff
+export export GOPATH=$HOME/go # golang workspace
+export PATH=$PATH:$GOPATH/bin # add golang executable
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
