@@ -16,14 +16,14 @@ HISTFILESIZE=100000
 # no duplicate entries
 HISTCONTROL=ignoredups:erasedups
 
-# append to history, don't overwrite it
-shopt -s histappend
-
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
 export EDITOR='vim'
+
+# disable stupid mac zsh prompt
+export BASH_SILENCE_DEPRECATION_WARNING=1
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 #case "$TERM" in
