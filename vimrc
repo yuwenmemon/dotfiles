@@ -280,7 +280,7 @@ nnoremap H ^
 nmap <F1> :!git diff -- %<cr>
 
 " Toggle line numbers
-nnoremap <F2> :set nonumber!<CR>
+nnoremap <F2> :set nonumber! relativenumber!<CR>
 
 " Search for git conflict markers
 nnoremap <f3> /\v[=\<\>]{4,}<cr>
