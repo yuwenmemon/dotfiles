@@ -5,11 +5,7 @@ filetype off                  " required
 call plug#begin('~/.vim/plugged')
 
 " Make sure you use single quotes
-"Plug 'ctrlpvim/ctrlp.vim'
-
 Plug 'ludovicchabant/vim-gutentags'
-
-Plug 'Valloric/YouCompleteMe'
 
 Plug 'jelera/vim-javascript-syntax'
 
@@ -24,8 +20,6 @@ Plug 'nanotech/jellybeans.vim', { 'tag': 'v1.6' }
 Plug 'pangloss/vim-javascript'
 
 Plug 'NLKNguyen/papercolor-theme'
-
-"Plug 'ivalkeen/vim-ctrlp-tjump'
 
 Plug 'NLKNguyen/c-syntax.vim'
 
