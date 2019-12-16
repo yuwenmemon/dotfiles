@@ -25,6 +25,11 @@ export EDITOR='vim'
 # disable stupid mac zsh prompt
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
+# Set default less behavior
+# I - ignore case when searching
+# R - enable color output when piping
+export LESS="IR"
+
 # set a fancy prompt (non-color, unless we know we "want" color)
 #case "$TERM" in
 #    xterm-color) color_prompt=no;;
