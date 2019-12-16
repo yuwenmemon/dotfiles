@@ -5,7 +5,7 @@ filetype off                  " required
 call plug#begin('~/.vim/plugged')
 
 " Make sure you use single quotes
-Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'ctrlpvim/ctrlp.vim'
 
 Plug 'ludovicchabant/vim-gutentags'
 
@@ -25,11 +25,14 @@ Plug 'pangloss/vim-javascript'
 
 Plug 'NLKNguyen/papercolor-theme'
 
-Plug 'ivalkeen/vim-ctrlp-tjump'
+"Plug 'ivalkeen/vim-ctrlp-tjump'
 
 Plug 'NLKNguyen/c-syntax.vim'
 
 Plug 'zxqfl/tabnine-vim'
+
+" Install fuzzy finder for vim and cli
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
 " Initialize plugin system
 call plug#end()

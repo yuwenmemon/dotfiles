@@ -103,3 +103,5 @@ function color_my_prompt {
 PROMPT_COMMAND=color_my_prompt
 
 source ~/.git-completion.bash
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
