@@ -18,7 +18,7 @@ alias authclean="find . -name '.build' | xargs rm -rfv"
 alias copymobilehosts="adb push /etc/hosts /system/etc/hosts"
 alias ackmultiple="echo 'ack -l [query2] | ack -x [query2]'"
 alias smartscan="vssh php /vagrant/Web-Expensify/_tasks/receiptscan.php"
-alias ngrok_start="ngrok http --hostname=expensify-bondy.ngrok.io --host-header rewrite www.expensify.com.dev:80"
+alias ngrok_start="ngrok http --hostname=expensify-bondy.ngrok.io --host-header rewrite www.expensify.com.dev:443"
 alias cleanBranches="git branch --merge | egrep -v '(^\*|master)' | xargs git branch -d"
 
 # expensify mobile QA things
