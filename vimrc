@@ -67,9 +67,6 @@ let g:PaperColor_Theme_Options = {
 colorscheme PaperColor
 
 set statusline+=%{gutentags#statusline()}
-nnoremap <c-]> :CtrlPtjump<cr>
-vnoremap <c-]> :CtrlPtjumpVisual<cr>
-
 
 " execute pathogen#infect()
 " let g:CommandTWildIgnore=&wildignore . ",**/node_modules/*"
@@ -244,15 +241,6 @@ map <leader>n :call RenameFile()<cr>
 
 set timeoutlen=400
 " nmap <leader>m :CommandT <cr>
-nmap <leader>m :CtrlP <cr>
-nmap <leader>b :CtrlPBuffer <cr>
-let g:ctrlp_custom_ignore = {
-    \ 'file': '\v(\.x)$',
-    \ 'dir': '\v(node_modules|vendor|externalLib|build)$',
-    \ }
-    "\ 'dir': '\v(node_modules|externalLib|build)$',
-"let g:ctrlp_working_path_mode = 'c'
-
 
 " Copy current buffer content and return to position
 nmap <leader>c mxgg"*yG'x
