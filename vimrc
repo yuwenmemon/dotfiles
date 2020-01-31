@@ -92,6 +92,7 @@ set switchbuf=useopen
 set numberwidth=4
 set showtabline=2
 set winwidth=79
+set spell spelllang=en_us
 
 " This makes RVM work inside Vim. I have no idea why.
 set shell=bash
