@@ -428,4 +428,5 @@
 --ignore-file=is:tags
 --ignore-file=is:iOS/Expensify.xcodeproj/project.pbxproj
 --ignore-file=is:tags.temp.tmp
+--ignore-file=is:tags.temp
 --ignore-file=is:si-tx-operations.json
