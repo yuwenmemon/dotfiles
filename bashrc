@@ -98,7 +98,11 @@ function color_my_prompt {
     local git_branch='`git branch 2> /dev/null | grep -e ^* | sed -E  s/^\\\\\*\ \(.+\)$/\(\\\\\1\)\ /`'
     local last_color="\[\033[00m\]"
     local prompt_symbol="$"
-    export PS1="$dircolor$twolastdirs $branch_color$git_branch$prompt_symbol$last_color "
+    if  [ -z "${VIRTUAL_ENV}" ] ; then
+        export PS1="$dircolor$twolastdirs $branch_color$git_branch$prompt_symbol$last_color "
+    else
+        export PS1="[saltfab]$dircolor$twolastdirs $branch_color$git_branch$prompt_symbol$last_color "
+    fi
 }
 PROMPT_COMMAND=color_my_prompt
 
