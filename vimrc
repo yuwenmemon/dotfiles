@@ -63,7 +63,17 @@ let g:PaperColor_Theme_Options = {
   \ }
 colorscheme PaperColor
 
+" Gutentag settings
 set statusline+=%{gutentags#statusline()}
+" When to regenerate tags
+let g:gutentags_generate_on_new = 1
+let g:gutentags_generate_on_missing = 1
+let g:gutentags_generate_on_write = 1
+let g:gutentags_generate_on_empty_buffer = 0
+let g:gutentags_add_default_project_roots = 0
+" define various roots for 'projects' to break up tag file sizes
+let g:gutentags_project_root = ['package.json', '.git', 'Web-Expensify/site', 'Web-Expensify/lib']
+let g:gutentags_ctags_extra_args = ['--options=/Users/dbondy/dotfiles/ctag.options']
 
 " execute pathogen#infect()
 " let g:CommandTWildIgnore=&wildignore . ",**/node_modules/*"
