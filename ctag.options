@@ -1,8 +1,6 @@
-# Let Gutentags generate more info for the tags.
 --tag-relative=yes
 --fields=+ailmnS
 
-# exlude lists
 --exclude='*.svg'
 --exclude='*.hg'
 --exclude='build'
