@@ -11,6 +11,7 @@
 --exclude='compiled'
 --exclude='bundle'
 --exclude='vendor'
+--exclude='build_travis'
 --exclude='*.md'
 --exclude='*-lock.json'
 --exclude='*.lock'
