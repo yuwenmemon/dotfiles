@@ -25,6 +25,8 @@ Plug 'zxqfl/tabnine-vim'
 " Install fuzzy finder for vim and cli
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
+Plug 'vim-vdebug/vdebug', {'tag': 'v1.5.2'}
+
 " Initialize plugin system
 call plug#end()
 
@@ -415,3 +417,13 @@ function! DoPrettyXML()
   exe "set ft=" . l:origft
 endfunction
 command! PrettyXML call DoPrettyXML()
+
+let g:vdebug_options = {}
+let g:vdebug_options["path_maps"] = {
+\    "/vagrant/Server-Scraper" : $HOME."/Expensidev/Server-Scraper",
+\    "/vagrant/Web-Expensify" : $HOME."/Expensidev/Web-Expensify",
+\    "/vagrant/config/www/switch/_beforeSwitch.php" : $HOME."/Expensidev/Web-Expensify/_before.php",
+\    "/vagrant/config/www/switch/_afterSwitch.php" : $HOME."/Expensidev/Web-Expensify/_after.php"
+\}
+let g:vdebug_options['timeout'] = 60
+let g:vdebug_options['break_on_open'] = 0
