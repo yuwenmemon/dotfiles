@@ -20,6 +20,7 @@ alias ackmultiple="echo 'ack -l [query2] | ack -x [query2]'"
 alias smartscan="vssh php /vagrant/Web-Expensify/_tasks/receiptscan.php"
 alias ngrok_start="ngrok http --hostname=expensify-bondy.ngrok.io --host-header rewrite www.expensify.com.dev:443"
 alias cleanBranches="git branch --merge | egrep -v '(^\*|master)' | xargs git branch -d"
+alias saltfab="cd ~/Expensidev/Ops-Configs/saltfab && source venv/bin/activate"
 
 # expensify mobile QA things
 export GITHUB_TOKEN=9b1ef9324b57a3263ad7b70ecd5cc0a2700a49c3
@@ -57,5 +58,11 @@ function pr(){
     remote=`git remote -v | grep origin | head -1 | awk '{print $2'} | sed 's/.*:\(.*\)*/\1/' | sed 's/\.git$//'`
     branch=`git rev-parse --abbrev-ref HEAD`
     open "https://github.com/$remote/compare/${1:-master}...$branch?expand=1&body=please%20review%0A-%20Fixes%0A%0A%23%23%23%23%23%20Dev%20tests%0A%23%23%23%23%23%20QA%20tests%0A"
+}
+
+# Follow The Leader - list out which servers is Leader and which are Followers
+function ftl(){
+    saltfab
+    fab -g bastion1.sjc -u dbondy -H webrock1.sjc -- "echo -ne \"status\\r\\nconnection:close\\r\\n\\r\\n\" | nc -w 60 localhost 8888 | tail -1 | jq '(\"\(.host) \(.state)\"), (.peerList[] | \"\(.host) \(.State)\")'" | grep out
 }
 
