@@ -226,12 +226,6 @@ endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <s-tab> <c-n>
 
-" move between splits/buffers
-map <Left> <C-H>
-map <Right> <C-L>
-map <Up> :bnext <cr>
-map <Down> :bprevious <cr>
-
 " Rename current file
 function! RenameFile()
     let old_name = expand('%')
