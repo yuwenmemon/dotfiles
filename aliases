@@ -66,3 +66,6 @@ function ftl(){
     fab -g bastion1.sjc -u dbondy -H webrock1.sjc -- "echo -ne \"status\\r\\nconnection:close\\r\\n\\r\\n\" | nc -w 60 localhost 8888 | tail -1 | jq '(\"\(.host) \(.state)\"), (.peerList[] | \"\(.host) \(.State)\")'" | grep out
 }
 
+function tfa(){
+    2fa "$1" | pbcopy
+}
