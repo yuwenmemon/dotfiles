@@ -22,9 +22,6 @@ alias ngrok_start="ngrok http --hostname=expensify-bondy.ngrok.io --host-header 
 alias cleanBranches="git branch --merge | egrep -v '(^\*|master)' | xargs git branch -d"
 alias saltfab="cd ~/Expensidev/Ops-Configs/saltfab && source venv/bin/activate"
 
-# expensify mobile QA things
-export GITHUB_TOKEN=9b1ef9324b57a3263ad7b70ecd5cc0a2700a49c3
-
 # adding things $PATH
 export PATH=/usr/local/bin:$PATH
 export PATH=$PATH:~/Library/Android/sdk/platform-tools # android sdk tools (adb)
