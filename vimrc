@@ -25,6 +25,8 @@ Plug 'zxqfl/tabnine-vim'
 " Install fuzzy finder for vim and cli
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
+Plug 'vim-vdebug/vdebug', {'tag': 'v1.5.2'}
+
 " Initialize plugin system
 call plug#end()
 
@@ -42,9 +44,9 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_always_populate_loc_list = 0
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:javascript_plugin_jsdoc = 1
 let g:loaded_syntastic_java_javac_checker = 1 " disable javac checker
@@ -191,6 +193,8 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
+nnoremap GT gT
+
 " Can't be bothered to understand ESC vs <c-c> in insert mode
 imap <c-c> <esc>
 
@@ -221,12 +225,6 @@ function! InsertTabWrapper()
 endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <s-tab> <c-n>
-
-" move between splits/buffers
-map <Left> <C-H>
-map <Right> <C-L>
-map <Up> :bnext <cr>
-map <Down> :bprevious <cr>
 
 " Rename current file
 function! RenameFile()
@@ -376,6 +374,46 @@ nnoremap <leader>f :call SelectaCommand("find * -type f", "", ":e")<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vdebug
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:vdebug_options = {}
+let g:vdebug_options["path_maps"] = {
+\    "/vagrant/Server-Scraper" : $HOME."/Expensidev/Server-Scraper",
+\    "/vagrant/Web-Expensify" : $HOME."/Expensidev/Web-Expensify",
+\    "/vagrant/config/www/switch/_beforeSwitch.php" : $HOME."/Expensidev/Web-Expensify/_before.php",
+\    "/vagrant/config/www/switch/_afterSwitch.php" : $HOME."/Expensidev/Web-Expensify/_after.php"
+\}
+let g:vdebug_options['timeout'] = 60
+let g:vdebug_options['break_on_open'] = 0
+
+" from https://vim.fandom.com/wiki/Pretty-formatting_XML
+function! DoPrettyXML()
+  " save the filetype so we can restore it later
+  let l:origft = &ft
+  set ft=
+  " delete the xml header if it exists. This will
+  " permit us to surround the document with fake tags
+  " without creating invalid xml.
+  1s/<?xml .*?>//e
+  " insert fake tags around the entire document.
+  " This will permit us to pretty-format excerpts of
+  " XML that may contain multiple top-level elements.
+  0put ='<PrettyXML>'
+  $put ='</PrettyXML>'
+  silent %!xmllint --format -
+  " xmllint will insert an <?xml?> header. it's easy enough to delete
+  " if you don't want it.
+  " delete the fake tags
+  2d
+  $d
+  " restore the 'normal' indentation, which is one extra level
+  " too deep due to the extra tags we wrapped around the document.
+  silent %<
+  " back to home
+  1
+  " restore the filetype
+  exe "set ft=" . l:origft
+endfunction
+command! PrettyXML call DoPrettyXML()
+
 let g:vdebug_options = {}
 let g:vdebug_options["path_maps"] = {
 \    "/vagrant/Server-Scraper" : $HOME."/Expensidev/Server-Scraper",
