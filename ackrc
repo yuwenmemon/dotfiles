@@ -413,6 +413,8 @@
 # Expensify configs
 --ignore-directory=is:build_travis
 --ignore-directory=is:build
+--ignore-directory=is:.build
+--ignore-directory=is:builds
 --ignore-directory=is:vendor
 --ignore-directory=is:_support/js/
 --ignore-directory=is:site/external/
@@ -424,9 +426,11 @@
 --ignore-directory=is:test/
 --ignore-directory=is:concierge/test/sample_data
 --ignore-directory=is:ccache_dir
+--ignore-directory=is:Expensify/docs
 --ignore-file=is:samplePolicy.json
 --ignore-file=is:tags
 --ignore-file=is:iOS/Expensify.xcodeproj/project.pbxproj
 --ignore-file=is:tags.temp.tmp
 --ignore-file=is:tags.temp
 --ignore-file=is:si-tx-operations.json
+
