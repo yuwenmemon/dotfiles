@@ -66,3 +66,11 @@ function ftl(){
 function tfa(){
     2fa "$1" | pbcopy
 }
+
+function getPosturePID(){
+    ps -A | grep checkPosture | grep bash | awk '{print $1}'
+}
+
+function startPostureCheck(){
+    cd ~/scripts/ && ./checkPosture.sh
+}
