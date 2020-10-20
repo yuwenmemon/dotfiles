@@ -129,6 +129,9 @@ syntax on
 " Also load indent files, to automatically do language-dependent indenting.
 filetype plugin indent on
 
+" allow easier edits to crontab on macos
+autocmd FileType crontab setlocal bkc=yes
+
 " use emacs-style tab completion when selecting files, etc
 set wildmode=longest,list,full
 
@@ -293,6 +296,7 @@ command! Wq wq
 command! W w
 command! Q q
 command! Qa qa
+command! Formatjson %!python -m json.tool
 nnoremap vv :e ~/.vimrc<cr>
 
 augroup js_syntax " {
