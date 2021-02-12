@@ -20,7 +20,11 @@ Plug 'NLKNguyen/papercolor-theme'
 
 Plug 'NLKNguyen/c-syntax.vim'
 
-Plug 'zxqfl/tabnine-vim'
+Plug 'prabirshrestha/async.vim'
+
+Plug 'prabirshrestha/vim-lsp'
+
+Plug 'ajh17/vimcompletesme'
 
 " Install fuzzy finder for vim and cli
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -75,7 +79,6 @@ let g:gutentags_generate_on_empty_buffer = 0
 let g:gutentags_add_default_project_roots = 0
 " define various roots for 'projects' to break up tag file sizes
 let g:gutentags_project_root = ['package.json', '.git', 'Web-Expensify/site', 'Web-Expensify/lib']
-let g:gutentags_ctags_extra_args = ['--options=/Users/dbondy/dotfiles/ctag.options']
 
 " execute pathogen#infect()
 " let g:CommandTWildIgnore=&wildignore . ",**/node_modules/*"
