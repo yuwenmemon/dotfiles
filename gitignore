@@ -1,6 +1,6 @@
 # ctags
 .tags
-tags
+tags*
 
 .tern-project
 
