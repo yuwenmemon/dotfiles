@@ -1,0 +1,10 @@
+# ctags
+.tags
+tags
+
+.tern-project
+
+.ycm_extra_conf.py
+
+# vim sessions
+*.vim
