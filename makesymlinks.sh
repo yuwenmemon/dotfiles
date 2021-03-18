@@ -23,6 +23,9 @@ do
     rm ~/.$file
 done
 
+printf '\e[1;34m%-6s\e[m' "Removing ctag defaults"
+rm ~/.ctags.d/default.ctags
+
 printf '\e[1;34m%-6s\e[m' "Creating symlink to files in home directory"
 printf "\n"
 for file in $files
@@ -30,3 +33,6 @@ do
     printf "ln -s $dir/$file  ~/.$file\n"
     ln -s $dir/$file ~/.$file
 done
+
+printf '\e[1;34m%-6s\e[m' "Creating symlink to ctag defaults"
+ln -s $dir/default.ctag ~/.ctags.d/default.ctags

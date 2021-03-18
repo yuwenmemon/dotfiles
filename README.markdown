@@ -19,3 +19,7 @@ git clone git://github.com/bondydaa/dotfiles ~/dotfiles
 cd ~/dotfiles
 ./makesymlinks.sh
 ```
+
+Ctags
+------------
+Use universal-ctags: [https://github.com/universal-ctags/ctags](https://github.com/universal-ctags/ctags)
