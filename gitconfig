@@ -1,13 +1,12 @@
-[core]
-    editor = vim
-    excludesfile = /Users/dbondy/.gitignore
 [user]
     name = David Bondy
     email = bondydaa@gmail.com
 [github]
-	user = bondydaa
+    user = bondydaa
+[commit]
+    gpgsign = true
 [color]
-	ui = true
+    ui = true
 [diff]
     tool = vimdiff
 [difftool]
@@ -52,3 +51,6 @@
     dif = diff
     difff = diff
     shoe = git show
+[core]
+	editor = vim
+	excludesfile = /Users/davidbondy/.gitignore
