@@ -427,6 +427,7 @@
 --ignore-directory=is:concierge/test/sample_data
 --ignore-directory=is:ccache_dir
 --ignore-directory=is:Expensify/docs
+--ignore-directory=is:externalLib/openflights
 --ignore-file=is:samplePolicy.json
 --ignore-file=is:tags
 --ignore-file=is:iOS/Expensify.xcodeproj/project.pbxproj
