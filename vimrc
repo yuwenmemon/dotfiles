@@ -34,8 +34,6 @@ Plug 'vim-vdebug/vdebug', {'tag': 'v1.5.2'}
 " Initialize plugin system
 call plug#end()
 
-set relativenumber
-
 " auto command to remove trailing whitespace on save
 autocmd BufWritePre * %s/\s\+$//e
 
@@ -277,7 +275,7 @@ nnoremap H ^
 nmap <F1> :!git diff -- %<cr>
 
 " Toggle line numbers
-nnoremap <F2> :set nonumber! relativenumber!<CR>
+nnoremap <F2> :set nonumber!<CR>
 
 " Search for git conflict markers
 nnoremap <f3> /\v[=\<\>]{4,}<cr>
