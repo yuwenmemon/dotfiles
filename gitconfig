@@ -1,6 +1,7 @@
 [user]
     name = David Bondy
     email = bondydaa@gmail.com
+    signingkey = E477D11A225601F6
 [github]
     user = bondydaa
 [commit]

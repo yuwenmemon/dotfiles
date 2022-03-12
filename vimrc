@@ -75,6 +75,7 @@ let g:gutentags_generate_on_missing = 1
 let g:gutentags_generate_on_write = 1
 let g:gutentags_generate_on_empty_buffer = 0
 let g:gutentags_add_default_project_roots = 0
+let g:gutentags_define_advanced_commands = 1
 " define various roots for 'projects' to break up tag file sizes
 let g:gutentags_project_root = ['package.json', '.git', 'Web-Expensify/site', 'Web-Expensify/lib']
 
