@@ -63,7 +63,7 @@ function pr(){
 # Follow The Leader - list out which servers is Leader and which are Followers
 function ftl(){
     saltfab
-    fab -g bastion1.sjc -H db1.sjc -- "echo -ne \"status\\r\\nconnection:close\\r\\n\\r\\n\" | nc -w 60 localhost 8888 | tail -1 | jq '(\"\(.host) \(.state)\"), (.peerList[] | \"\(.host) \(.State)\")'" | grep out
+    fab -g bastion1.sjc -H db1.sjc -- "echo -ne \"status\\r\\nconnection:close\\r\\n\\r\\n\" | nc -w 60 localhost 4444 | tail -1 | jq '(\"\(.host) \(.state)\"), (.peerList[] | \"\(.host) \(.State)\")'" | grep out
 }
 
 function tfa(){

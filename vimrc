@@ -6,7 +6,7 @@ Plug 'ludovicchabant/vim-gutentags'
 
 Plug 'jelera/vim-javascript-syntax'
 
-Plug 'vim-syntastic/syntastic'
+" Plug 'vim-syntastic/syntastic'
 
 Plug 'modess/vim-phpcolors'
 
@@ -26,6 +26,8 @@ Plug 'prabirshrestha/vim-lsp'
 
 Plug 'ajh17/vimcompletesme'
 
+Plug 'ericcurtin/CurtineIncSw.vim'
+
 " Install fuzzy finder for vim and cli
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
@@ -42,16 +44,16 @@ set splitbelow
 set splitright
 
 " Syntastic settings
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-let g:javascript_plugin_jsdoc = 1
-let g:loaded_syntastic_java_javac_checker = 1 " disable javac checker
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+"
+" let g:syntastic_always_populate_loc_list = 0
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 0
+" let g:syntastic_check_on_wq = 0
+" let g:javascript_plugin_jsdoc = 1
+" let g:loaded_syntastic_java_javac_checker = 1 " disable javac checker
 
 set t_Co=256
 set background=light
@@ -285,6 +287,10 @@ nmap <F4> :FixWhitespace<cr>
 
 " Toggle set paste
 nmap <F6> :set paste!<cr>:set paste?<cr>
+
+" Jump to header file
+" https://github.com/ericcurtin/CurtineIncSw.vim
+nmap ]] :call CurtineIncSw()<CR>
 
 " select inner word and go back to normal mode
 nnoremap <space> viw
