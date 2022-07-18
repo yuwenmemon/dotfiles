@@ -1,9 +1,7 @@
-#pyenv used for saltfab
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
-
 source ~/.bashrc
+
+#Add homebrew to path
+export PATH="/opt/homebrew/bin:$PATH"
 
 #rbenv used for mobile development
 export PATH="$HOME/.rbenv/bin:$PATH"
@@ -23,5 +21,8 @@ export GOPATH="${HOME}/.go"
 export GOROOT="$(brew --prefix golang)/libexec"
 export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 
-# Load pyenv into the shell
+#pyenv used for saltfab
+export PYENV_ROOT="$HOME/.pyenv"
+#export PATH="$PYENV_ROOT/bin:$PATH"
+export PATH="$PYENV_ROOT/shims:$PATH"
 eval "$(pyenv init -)"
