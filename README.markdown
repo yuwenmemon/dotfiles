@@ -27,4 +27,9 @@ Use universal-ctags: [https://github.com/universal-ctags/ctags](https://github.c
 Less Syntax Highlight
 ------------
 1. Install Boost libs in home dir [https://www.boost.org/doc/libs/1_75_0/more/getting_started/unix-variants.html#link-your-program-to-a-boost-library](https://www.boost.org/doc/libs/1_75_0/more/getting_started/unix-variants.html#link-your-program-to-a-boost-library)
+    - For apple silicon `brew install boost`
 1. Install [http://www.gnu.org/software/src-highlite/](http://www.gnu.org/software/src-highlite/) in home dir
+    - for apple silicon
+        - `brew install autoconf automake libtool`, `autoreconf -i`
+        - clone the repo into home dir, `mkdir build`
+        - in build dir `../configure CXXFLAGS=-I/opt/homebrew/Cellar/boost/1.79.0_1/include/ --with-boost-regex=boost_regex-mt`
