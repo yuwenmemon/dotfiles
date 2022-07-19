@@ -4,8 +4,10 @@ source ~/.bashrc
 export PATH="/opt/homebrew/bin:$PATH"
 
 #rbenv used for mobile development
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+if command -v rbenv 1>/dev/null 2>&1; then
+    export PATH="$HOME/.rbenv/bin:$PATH"
+    eval "$(rbenv init -)"
+fi
 
 #more mobile dev things
 #ruby-build installs a non-Homebrew OpenSSL for each Ruby version installed and these are never upgraded.
