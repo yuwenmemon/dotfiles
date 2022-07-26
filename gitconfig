@@ -11,3 +11,5 @@
     st = status
 [safe]
     directory = /vagrant/Web-Expensify
+[github]
+    user=yuwenmemon
