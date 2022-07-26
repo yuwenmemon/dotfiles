@@ -1,6 +1,6 @@
 Dotfiles
 ========
-Forked and inspired from [michaeljsmalley/dotfiles](https://github.com/michaeljsmalley/dotfiles)/[cead22/dotfiles](https://github.com/cead22/dotfiles)/[bondydaa/dotfiles](https://github.com/bondydaa/dotfiles),
+Forked and inspired from [michaeljsmalley/dotfiles](https://github.com/michaeljsmalley/dotfiles)/[cead22/dotfiles](https://github.com/cead22/dotfiles)/[bondydaa/dotfiles](https://github.com/bondydaa/dotfiles)/[thienlnam/dotfiles](https://github.com/thienlnam/dotfiles),
 this repository includes my custom dotfiles.
 
 They should be cloned to your home directory so that the path is `~/dotfiles/`.
