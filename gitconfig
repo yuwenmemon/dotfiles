@@ -1,9 +1,9 @@
 [user]
-    name = Yuwen Memon
-    email = yuwen@expensify.com
+	name = Yuwen Memon
+	email = yuwen@expensify.com
     signingkey = 5523FCA86FB2FEBD
 [commit]
-    gpgsign = true
+	gpgsign = true
 [alias]
     co = checkout
     br = branch
