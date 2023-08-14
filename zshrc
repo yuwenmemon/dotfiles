@@ -116,3 +116,6 @@ fi
 
 # Sublime Text Command Line
 export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
+
+# Cert-linking that resulted from WARP
+export NODE_EXTRA_CA_CERTS="$HOME/Expensidev/Ops-Configs/saltfab/cacert.pem"
