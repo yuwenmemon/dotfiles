@@ -13,7 +13,7 @@ alias log="ssh -At -t bastion1.sjc ssh -A log1.uw1"
 
 ## rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+eval "$(rbenv init - zsh)"
 
 ## Android
 export ANDROID_HOME=$HOME/Library/Android/sdk
@@ -25,6 +25,10 @@ export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
 export PATH=$PATH:$ANDROID_SDK_ROOT/tools
 export PATH=$PATH:$ANDROID_SDK_ROOT/tools/bin
 export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
+
+## Jenv
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"
 
 ## Personal shortcuts
 alias webexp="cd /Users/yuwen/Expensidev/Web-Expensify"
@@ -119,3 +123,4 @@ export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
 
 # Cert-linking that resulted from WARP
 export NODE_EXTRA_CA_CERTS="$HOME/Expensidev/Ops-Configs/saltfab/cacert.pem"
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-8.jdk/Contents/Home;
