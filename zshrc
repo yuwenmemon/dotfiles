@@ -49,7 +49,7 @@ zstyle ':vcs_info:*' enable git
 
 # Taken from this tutorial: https://scriptingosx.com/2019/07/moving-to-zsh-06-customizing-the-zsh-prompt/
 # The numbers are colors: https://jonasjacek.github.io/colors/
-PROMPT='%B%F{231}$USER@%m%f%b %B%F{183}%~%f%b %B%F{48}$vcs_info_msg_0_%f%b %# '
+PROMPT='%B%F{244}%D{%H:%M:%S}%f%b %B%F{231}$USER@%m%f%b %B%F{183}%~%f%b %B%F{48}$vcs_info_msg_0_%f%b %# '
 
 # grep
 alias grep="grep --exclude=\*.git\* -n --color=always"
