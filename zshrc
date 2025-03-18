@@ -122,5 +122,18 @@ fi
 export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
 
 # Cert-linking that resulted from WARP
-export NODE_EXTRA_CA_CERTS="$HOME/Expensidev/Ops-Configs/saltfab/cacert.pem"
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-8.jdk/Contents/Home;
+CA_CERT_PATH="${HOME}/src/expensify/Expensidev/Ops-Configs/saltfab/cacert.pem"
+if [ -f "$CA_CERT_PATH" ]; then
+    export NODE_EXTRA_CA_CERTS="$CA_CERT_PATH"
+    export AWS_CA_BUNDLE="$CA_CERT_PATH"
+    export SSL_CERT_FILE="$CA_CERT_PATH"
+    export CURL_CA_BUNDLE="$CA_CERT_PATH"
+    export BUNDLE_SSL_CA_CERT="$CA_CERT_PATH"
+    export REQUESTS_CA_BUNDLE="$CA_CERT_PATH"
+fi
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/yuwen/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/yuwen/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/yuwen/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/yuwen/google-cloud-sdk/completion.zsh.inc'; fi
