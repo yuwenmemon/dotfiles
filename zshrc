@@ -11,6 +11,9 @@ alias sshvm='ssh -A yuwen@dev -p 2222'
 alias sshtun='ssh -At -t bastion1.sjc ssh -A'
 alias log="ssh -At -t bastion1.sjc ssh -A log1.uw1"
 
+## saltfab
+alias saltfab="cd ${EXPENSIDEV:-$HOME/Expensidev}/Ops-Configs/saltfab && source venv/bin/activate"
+
 ## rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init - zsh)"
@@ -137,3 +140,11 @@ if [ -f '/Users/yuwen/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/yuwen/goo
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/yuwen/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/yuwen/google-cloud-sdk/completion.zsh.inc'; fi
+
+# PR Checklist
+checkedlist() {
+  curl -s 'https://raw.githubusercontent.com/Expensify/App/main/contributingGuides/REVIEWER_CHECKLIST.md' \
+  | sed -e 's/- \[ \]/- [x]/g' \
+  | pbcopy
+  echo "Reviewer checklist copied to clipboard with all boxes checked."
+}
