@@ -125,7 +125,7 @@ fi
 export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
 
 # Cert-linking that resulted from WARP
-CA_CERT_PATH="${HOME}/src/expensify/Expensidev/Ops-Configs/saltfab/cacert.pem"
+CA_CERT_PATH="${HOME}/Expensidev/Ops-Configs/saltfab/cacert.pem"
 if [ -f "$CA_CERT_PATH" ]; then
     export NODE_EXTRA_CA_CERTS="$CA_CERT_PATH"
     export AWS_CA_BUNDLE="$CA_CERT_PATH"
