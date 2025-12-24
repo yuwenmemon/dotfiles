@@ -30,3 +30,14 @@ do
     printf "ln -s $dir/$file  ~/.$file\n"
     ln -s $dir/$file ~/.$file
 done
+
+# Claude Code configuration
+printf '\e[1;34m%-6s\e[m' "Setting up Claude Code configuration"
+printf "\n"
+mkdir -p ~/.claude
+for file in settings.json statusline.sh
+do
+    rm -f ~/.claude/$file
+    printf "ln -s $dir/claude/$file  ~/.claude/$file\n"
+    ln -s $dir/claude/$file ~/.claude/$file
+done

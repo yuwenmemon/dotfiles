@@ -50,6 +50,9 @@ setopt prompt_subst
 zstyle ':vcs_info:git:*' formats '%F{48}(%b) %F{240}%r%f'
 zstyle ':vcs_info:*' enable git
 
+## atuin
+eval "$(atuin init zsh)"
+
 # Taken from this tutorial: https://scriptingosx.com/2019/07/moving-to-zsh-06-customizing-the-zsh-prompt/
 # The numbers are colors: https://jonasjacek.github.io/colors/
 PROMPT='%B%F{244}%D{%H:%M:%S}%f%b %B%F{231}$USER@%m%f%b %B%F{183}%~%f%b %B%F{48}$vcs_info_msg_0_%f%b %# '
@@ -121,9 +124,6 @@ if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
 
-# Sublime Text Command Line
-export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
-
 # Cert-linking that resulted from WARP
 CA_CERT_PATH="${HOME}/Expensidev/Ops-Configs/saltfab/cacert.pem"
 if [ -f "$CA_CERT_PATH" ]; then
@@ -148,3 +148,4 @@ checkedlist() {
   | pbcopy
   echo "Reviewer checklist copied to clipboard with all boxes checked."
 }
+export PATH="$HOME/.local/bin:$PATH"
