@@ -11,9 +11,6 @@ alias sshvm='ssh -A yuwen@dev -p 2222'
 alias sshtun='ssh -At -t bastion1.sjc ssh -A'
 alias log="ssh -At -t bastion1.sjc ssh -A log1.uw1"
 
-## saltfab
-alias saltfab="cd ${EXPENSIDEV:-$HOME/Expensidev}/Ops-Configs/saltfab && source venv/bin/activate"
-
 ## rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init - zsh)"
@@ -125,7 +122,7 @@ if command -v pyenv 1>/dev/null 2>&1; then
 fi
 
 # Cert-linking that resulted from WARP
-CA_CERT_PATH="${HOME}/Expensidev/Ops-Configs/saltfab/cacert.pem"
+CA_CERT_PATH="$HOME/Expensidev/Ops-Configs/src/saltfab/cacert.pem"
 if [ -f "$CA_CERT_PATH" ]; then
     export NODE_EXTRA_CA_CERTS="$CA_CERT_PATH"
     export AWS_CA_BUNDLE="$CA_CERT_PATH"
