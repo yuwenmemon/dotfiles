@@ -4,40 +4,60 @@
 # This script creates symlinks from the home directory to any desired dotfiles in ~/dotfiles
 ############################
 
+set -e
+
 # dotfiles directory
 dir=~/dotfiles
+olddir=~/dotfiles_old/$(date +%Y%m%d-%H%M%S)
 
-# list of files to symlink in homedir
+# list of files to symlink in homedir (target name is .$file)
 files="zshrc gitconfig git-completion.bash ackrc inputrc"
 
-# change to the dotfiles directory
+# list of Claude Code files to symlink. Each entry is "<src-relative-to-dotfiles>:<absolute-target>".
+claude_files=(
+    "claude/settings.json:$HOME/.claude/settings.json"
+    "claude/statusline.sh:$HOME/.claude/statusline.sh"
+    "claude/skills/stack-overflow-search.md:$HOME/.claude/skills/stack-overflow-search.md"
+    "claude/plugins/known_marketplaces.json:$HOME/.claude/plugins/known_marketplaces.json"
+)
+
+# Back up an existing target (file or directory) into $olddir, preserving its
+# relative path under $HOME. Symlinks are removed outright since there's nothing
+# to preserve.
+backup_target() {
+    local target=$1
+    if [ -L "$target" ]; then
+        rm "$target"
+    elif [ -e "$target" ]; then
+        local rel=${target#$HOME/}
+        mkdir -p "$olddir/$(dirname "$rel")"
+        mv "$target" "$olddir/$rel"
+        printf "  backed up %s -> %s/%s\n" "$target" "$olddir" "$rel"
+    fi
+}
+
+link() {
+    local src=$1 target=$2
+    mkdir -p "$(dirname "$target")"
+    backup_target "$target"
+    ln -s "$src" "$target"
+    printf "  ln -s %s %s\n" "$src" "$target"
+}
+
 echo -n "Changing to the $dir directory ..."
-cd $dir
+cd "$dir"
 echo "done"
 
-# move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks from the homedir to any files in the ~/dotfiles directory specified in $files
-printf '\e[1;34m%-6s\e[m' "Removing existing dotfiles"
-printf "\n"
+printf '\e[1;34m%-6s\e[m\n' "Linking top-level dotfiles"
 for file in $files
 do
-    rm ~/.$file
+    link "$dir/$file" "$HOME/.$file"
 done
 
-printf '\e[1;34m%-6s\e[m' "Creating symlink to files in home directory"
-printf "\n"
-for file in $files
+printf '\e[1;34m%-6s\e[m\n' "Setting up Claude Code configuration"
+for entry in "${claude_files[@]}"
 do
-    printf "ln -s $dir/$file  ~/.$file\n"
-    ln -s $dir/$file ~/.$file
-done
-
-# Claude Code configuration
-printf '\e[1;34m%-6s\e[m' "Setting up Claude Code configuration"
-printf "\n"
-mkdir -p ~/.claude
-for file in settings.json statusline.sh
-do
-    rm -f ~/.claude/$file
-    printf "ln -s $dir/claude/$file  ~/.claude/$file\n"
-    ln -s $dir/claude/$file ~/.claude/$file
+    src=${entry%%:*}
+    target=${entry#*:}
+    link "$dir/$src" "$target"
 done

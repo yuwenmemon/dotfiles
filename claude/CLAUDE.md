@@ -8,3 +8,14 @@ Types: `feat`, `fix`, `chore`, `docs`, `refactor`, `test`, `ci`, `style`, `perf`
 - Max 72 characters total
 - Imperative mood, lowercase, no period
 - Scope is optional but encouraged
+
+## GitHub Conversation Replies
+
+Different rules apply based on who authored the comment being replied to:
+
+- **Bot comments** (e.g. MelvinBot, BugZero, GitHub Actions, dependabot, copilot, any account with `[bot]` in the login or `type: "Bot"` from the GitHub API) — the agent may post the reply directly via `gh` or the API. Prefix the body with `(Yuwen's Agent) ` so reviewers know it's automated.
+- **Human comments** — do NOT post automatically. Draft the proposed reply in chat for Yuwen to review, then he sends it manually (or explicitly tells the agent to post it). If he does ask the agent to post on his behalf, still prefix with `(Yuwen's Agent) `.
+
+If the author type is uncertain, treat the comment as human and draft in chat.
+
+This applies to PR review-thread replies, PR issue comments, and GitHub issue comments. It does NOT apply to commit messages, PR titles, or PR descriptions.
