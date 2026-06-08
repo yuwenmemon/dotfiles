@@ -140,9 +140,26 @@ if [ -f '/Users/yuwen/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/yuw
 
 # PR Checklist
 checkedlist() {
-  curl -s 'https://raw.githubusercontent.com/Expensify/App/main/contributingGuides/REVIEWER_CHECKLIST.md' \
-  | sed -e 's/- \[ \]/- [x]/g' \
-  | pbcopy
-  echo "Reviewer checklist copied to clipboard with all boxes checked."
+  local kind="${1:-reviewer}"
+  case "$kind" in
+    reviewer)
+      curl -s 'https://raw.githubusercontent.com/Expensify/App/main/contributingGuides/REVIEWER_CHECKLIST.md' \
+        | sed -e 's/- \[ \]/- [x]/g' \
+        | pbcopy
+      echo "Reviewer checklist copied to clipboard with all boxes checked."
+      ;;
+    author)
+      curl -s 'https://raw.githubusercontent.com/Expensify/App/main/.github/PULL_REQUEST_TEMPLATE.md' \
+        | awk '/^### PR Author Checklist/ { flag=1; print; next } flag && /^### / { exit } flag' \
+        | sed -e '/<!--/,/-->/d' \
+        | sed -e 's/- \[ \]/- [x]/g' \
+        | pbcopy
+      echo "Author checklist copied to clipboard with all boxes checked."
+      ;;
+    *)
+      echo "Usage: checkedlist [reviewer|author]" >&2
+      return 1
+      ;;
+  esac
 }
 export PATH="$HOME/.local/bin:$PATH"
