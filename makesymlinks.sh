@@ -18,6 +18,7 @@ claude_files=(
     "claude/settings.json:$HOME/.claude/settings.json"
     "claude/statusline.sh:$HOME/.claude/statusline.sh"
     "claude/skills/stack-overflow-search.md:$HOME/.claude/skills/stack-overflow-search.md"
+    "claude/skills/babysit-pr:$HOME/.claude/skills/babysit-pr"
     "claude/plugins/known_marketplaces.json:$HOME/.claude/plugins/known_marketplaces.json"
 )
 
