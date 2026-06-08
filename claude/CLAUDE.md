@@ -19,3 +19,7 @@ Different rules apply based on who authored the comment being replied to:
 If the author type is uncertain, treat the comment as human and draft in chat.
 
 This applies to PR review-thread replies, PR issue comments, and GitHub issue comments. It does NOT apply to commit messages, PR titles, or PR descriptions.
+
+## After Creating a Pull Request
+
+Creating a PR is the start of a monitoring loop, not the end of the task. After opening a PR, run the `babysit-pr` skill to watch it until CI and bots settle and to respond to actionable bot comments.
