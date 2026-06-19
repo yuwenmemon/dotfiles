@@ -1,0 +1,58 @@
+#!/bin/bash
+#
+# aztail - tail Agent Zero (ProcessAgentZeroRequest) logs from the dev VM with
+# highlighting for the key request-loop events. Personal tool; depends on vssh.
+#
+# Usage:
+#   aztail            tail every agentZeroRequestID_ line
+#   aztail <regex>    additionally narrow to lines matching <regex>
+#                     (e.g. a request-id suffix, reportID, or persona name)
+
+# Colors. tput runs locally; the resulting SGR codes are embedded into the sed
+# program, which itself runs on the VM (vssh routes remote output to stderr, so
+# the coloring has to happen inside the remote command, not via a local pipe).
+normal=$(tput sgr0)
+purple=$(tput setaf 5)             # agentZeroRequestID_ token
+panic=$(tput bold; tput setaf 1)   # fatal signals / stack traces
+orange=$(tput bold; tput setaf 172) # alerts
+yellow=$(tput bold; tput setaf 3)  # warnings
+green=$(tput bold; tput setaf 2)   # [info]
+cyan=$(tput bold; tput setaf 6)    # slow / yell
+blue=$(tput setaf 4)               # PHP notices
+hilite=$(tput bold; tput setaf 15) # extra narrowing term
+
+# Agent Zero request-loop event colors
+azDispatch=$(tput bold; tput setaf 201)  # a tool call being dispatched
+azToolResp=$(tput bold; tput setaf 44)   # responses collected from executed tool calls
+azReason=$(tput setaf 245)               # model reasoning items
+azStop=$(tput bold; tput setaf 214)      # stop / final response and loop totals
+
+# Highlight the agentZeroRequestID_ token
+SEDID="s/(agentZeroRequestID_)/$purple\1$normal/g"
+
+# Base severity highlighting so errors still pop while debugging
+SEDBASE="s/(\[warn\]|PHP Warning|fatal error)/$yellow\1$normal/g"
+SEDBASE="$SEDBASE;s/(\[info\])/$green\1$normal/g"
+SEDBASE="$SEDBASE;s/( Slow .+|\[yell\])/$cyan\1$normal/g"
+SEDBASE="$SEDBASE;s/(\[alrt\]|\[security\]|PHP Fatal error|PHP Parse error|You have an error in your SQL syntax)/$orange\1$normal/g"
+SEDBASE="$SEDBASE;s/([A-Z0-9]{220,256}|Captured fatal signal|Database closed.|Graceful process shutdown complete)/$panic\1$normal/g"
+SEDBASE="$SEDBASE;s/(\[trace\] .+)/$panic\1$normal/g"
+SEDBASE="$SEDBASE;s/(PHP Notice.+)/$blue\1$normal/g"
+
+# Agent Zero request-loop events
+SEDAZ="s/(Dispatching tool call: [A-Za-z]+)/$azDispatch\1$normal/g"
+SEDAZ="$SEDAZ;s/(Finished processing tool calls\. Collected responses:|Processing responses from executed Auth commands)/$azToolResp\1$normal/g"
+SEDAZ="$SEDAZ;s/(Skipping non-encrypted reasoning item)/$azReason\1$normal/g"
+SEDAZ="$SEDAZ;s/(Tools: none \(final response\)|Total: [0-9]+ loops)/$azStop\1$normal/g"
+
+# Optional extra narrowing filter, with its own highlight
+extragrep=""
+if [[ -n "$1" ]]; then
+  extragrep="| grep -a -E --line-buffered '$1'"
+  SEDAZ="$SEDAZ;s/($1)/$hilite\1$normal/g"
+fi
+
+# vssh finds the VM by walking up for .vagrant, so run from the Expensidev tree
+cd /Users/yuwen/Expensidev || exit 1
+
+vssh "sudo tail -F /var/log/syslog | grep -a -E --line-buffered 'agentZeroRequestID_' $extragrep | sed -E '$SEDID;$SEDBASE;$SEDAZ'"

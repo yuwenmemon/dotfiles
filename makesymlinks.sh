@@ -28,6 +28,7 @@ claude_files=(
 bin_files=(
     "bin/git-grab-branch:$HOME/bin/git-grab-branch"
     "bin/git-grab-branch:$HOME/bin/ggb"
+    "bin/aztail:$HOME/bin/aztail"
 )
 
 # Back up an existing target (file or directory) into $olddir, preserving its
