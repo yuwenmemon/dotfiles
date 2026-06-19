@@ -23,6 +23,13 @@ claude_files=(
     "claude/plugins/known_marketplaces.json:$HOME/.claude/plugins/known_marketplaces.json"
 )
 
+# list of ~/bin scripts to symlink. Each entry is "<src-relative-to-dotfiles>:<absolute-target>".
+# git-grab-branch is linked twice so its short alias `ggb` is managed too.
+bin_files=(
+    "bin/git-grab-branch:$HOME/bin/git-grab-branch"
+    "bin/git-grab-branch:$HOME/bin/ggb"
+)
+
 # Back up an existing target (file or directory) into $olddir, preserving its
 # relative path under $HOME. Symlinks are removed outright since there's nothing
 # to preserve.
@@ -58,6 +65,14 @@ done
 
 printf '\e[1;34m%-6s\e[m\n' "Setting up Claude Code configuration"
 for entry in "${claude_files[@]}"
+do
+    src=${entry%%:*}
+    target=${entry#*:}
+    link "$dir/$src" "$target"
+done
+
+printf '\e[1;34m%-6s\e[m\n' "Linking ~/bin scripts"
+for entry in "${bin_files[@]}"
 do
     src=${entry%%:*}
     target=${entry#*:}

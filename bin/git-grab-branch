@@ -1,0 +1,104 @@
+#!/usr/bin/env bash
+#
+# git-grab-branch — switch the current worktree to a branch that is currently
+# checked out in another worktree, by first "freeing" it from that worktree.
+#
+# Git refuses to check out the same branch in two worktrees at once. This frees
+# the branch from whichever worktree holds it, then switches the current
+# worktree onto it.
+#
+# Usage:
+#   git grab-branch <branch>          # detach the holding worktree, switch here
+#   git grab-branch -r <branch>       # remove the holding worktree instead, switch here
+#   git grab-branch --remove <branch>
+#
+# "Detach" (default) is non-destructive: the holding worktree's directory and
+# any uncommitted changes are left intact — its HEAD is just detached at the
+# same commit so the branch is no longer "checked out" there.
+#
+# If the final switch fails (e.g. the current worktree has conflicting local
+# changes), the holding worktree is re-attached to the branch so nothing is left
+# half-done.
+set -euo pipefail
+
+prog="$(basename "$0")"
+mode="detach"
+
+usage() {
+    cat >&2 <<EOF
+usage: $prog [-r|--remove] <branch>
+
+  Switch the current worktree to <branch>, freeing it from whatever worktree
+  currently holds it.
+
+  (default)        detach the holding worktree's HEAD (keeps its dir + changes)
+  -r, --remove     remove the holding worktree entirely (must be clean)
+EOF
+    exit "${1:-2}"
+}
+
+branch=""
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        -r|--remove) mode="remove"; shift ;;
+        -h|--help) usage 0 ;;
+        --) shift; break ;;
+        -*) echo "$prog: unknown option '$1'" >&2; usage ;;
+        *) branch="$1"; shift ;;
+    esac
+done
+# Allow the branch to follow a `--` separator: `git grab-branch -- <branch>`
+if [[ -z "$branch" && $# -gt 0 ]]; then
+    branch="$1"
+fi
+[[ -n "$branch" ]] || usage
+
+# Must be inside a git repository.
+git rev-parse --git-dir >/dev/null 2>&1 || { echo "$prog: not a git repository" >&2; exit 1; }
+
+# The branch must exist locally.
+if ! git show-ref --verify --quiet "refs/heads/$branch"; then
+    echo "$prog: local branch '$branch' does not exist" >&2
+    exit 1
+fi
+
+# Already on it here? Nothing to do.
+current="$(git symbolic-ref --quiet --short HEAD 2>/dev/null || true)"
+if [[ "$current" == "$branch" ]]; then
+    echo "$prog: already on '$branch'"
+    exit 0
+fi
+
+this_wt="$(git rev-parse --show-toplevel)"
+
+# Find the worktree (if any) whose HEAD is this branch, from porcelain output.
+holding="$(git worktree list --porcelain | awk -v b="refs/heads/$branch" '
+    $1 == "worktree" { wt = substr($0, index($0, " ") + 1) }
+    $1 == "branch"   && $2 == b { print wt; exit }
+')"
+
+freed=""
+if [[ -n "$holding" && "$holding" != "$this_wt" ]]; then
+    if [[ "$mode" == "remove" ]]; then
+        echo "$prog: removing worktree holding '$branch': $holding"
+        git worktree remove "$holding"
+        # Branch ref persists after the worktree is removed; nothing to roll back.
+    else
+        echo "$prog: detaching '$branch' from worktree: $holding"
+        git -C "$holding" switch --detach
+        freed="$holding"
+    fi
+fi
+
+# Switch the current worktree onto the branch. On failure, re-attach the branch
+# to the worktree we detached so the state is restored.
+if ! git switch "$branch"; then
+    status=$?
+    if [[ -n "$freed" ]]; then
+        echo "$prog: switch failed — re-attaching '$branch' to $freed" >&2
+        git -C "$freed" switch "$branch" || true
+    fi
+    exit "$status"
+fi
+
+echo "$prog: switched to '$branch' in $this_wt"
