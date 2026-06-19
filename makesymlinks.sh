@@ -15,6 +15,7 @@ files="zshrc gitconfig git-completion.bash ackrc inputrc"
 
 # list of Claude Code files to symlink. Each entry is "<src-relative-to-dotfiles>:<absolute-target>".
 claude_files=(
+    "claude/CLAUDE.md:$HOME/.claude/CLAUDE.md"
     "claude/settings.json:$HOME/.claude/settings.json"
     "claude/statusline.sh:$HOME/.claude/statusline.sh"
     "claude/skills/stack-overflow-search.md:$HOME/.claude/skills/stack-overflow-search.md"
