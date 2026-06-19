@@ -9,6 +9,11 @@ Types: `feat`, `fix`, `chore`, `docs`, `refactor`, `test`, `ci`, `style`, `perf`
 - Imperative mood, lowercase, no period
 - Scope is optional but encouraged
 
+## Code Comments
+
+- Avoid repeating the same explanation in multiple places. Put the comment at the most useful level of abstraction.
+- Keep comments direct and succinct while preserving enough context for the reader to understand the why.
+
 ## GitHub Conversation Replies
 
 Different rules apply based on who authored the comment being replied to:
@@ -19,6 +24,8 @@ Different rules apply based on who authored the comment being replied to:
 If the author type is uncertain, treat the comment as human and draft in chat.
 
 This applies to PR review-thread replies, PR issue comments, and GitHub issue comments. It does NOT apply to commit messages, PR titles, or PR descriptions.
+
+Keep `(Yuwen's Agent)` replies concise and non-redundant. Say the useful part directly, avoid restating the same point in multiple ways, and include only the context needed for the reviewer or bot to understand the response.
 
 ## After Creating a Pull Request
 
